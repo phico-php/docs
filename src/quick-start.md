@@ -71,7 +71,7 @@ boot.php            -- sets up the environment and starts Phico
 
 #### Storage permissions
 
-NB: Make sure that the `storage` folder can be written to by the user your webserver is running under.
+**Note:** Ensure the `storage` folder can be written to by the webserver account.
 
 ## Initialise the app
 
