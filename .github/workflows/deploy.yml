@@ -1,37 +1,41 @@
 name: Deploy VuePress Site
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+        steps:
+            # Checkout the repository
+            - name: Checkout repository
+              uses: actions/checkout@v3
 
-      # Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22
+            # Setup Node.js
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 22
 
-      # Install dependencies and build
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run docs:build
+            # Install dependencies and build
+            - name: Install dependencies and build
+              run: |
+                  npm install
+                  npm run docs:build
 
-      # Setup SSH
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            # Setup SSH
+            - name: Setup SSH
+              uses: webfactory/ssh-agent@v0.7.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Deploy via rsync
-      - name: Deploy to remote server
-        run: |
-          rsync -avz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public/
+            # Create known hosts
+            - name: Create known hosts file
+              run: mkdir -p -m 0700 ~/.ssh && echo ${{ secrets.SSH_SERVER_FINGERPRINTS }} >> ~/.ssh/known_hosts
+
+            # Deploy via rsync
+            - name: Deploy to remote server
+              run: |
+                  rsync -avz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public/
