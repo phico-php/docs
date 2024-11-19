@@ -1,6 +1,6 @@
 # Router
 
-Router provides support for `named routes`, route middleware and the `pathFor()` helper function.
+Router provides support for _named routes_, route middleware and the `pathFor()` helper function.
 
 ## Installation
 
@@ -10,18 +10,141 @@ Install via composer if required.
 composer require phico/router
 ```
 
-## Usage
+## Middleware
 
 Add the middleware to your application
 
 ```php
 // boot/middleware.php
 
+// RouteHandler requires a Router instance, which requires the defined routes
+$router = (new \Phico\Router\Router())->add($routes);
+
+// middleware is called top to bottom
 $app->use[
+
     // other middleware ...
-    new \Phico\Router\RoutingMiddleware,
-    // other middleware ...
+
+    // the route handling middleware should be last
+    new \Phico\Router\RouteHandler($router),
 ];
 ```
 
-@TODO document router
+## Usage
+
+### Routing
+
+Use the `routes()` helper to get the Route collector instance.
+
+```php
+$routes = routes();
+```
+
+Then define your routes.
+
+#### Methods
+
+The Route Collector defines routes using the HTTP method verb `delete`, `get`, `head`, `options`, `patch`, `post`, `put`.
+
+```php
+$routes->delete("/users/{user_id}", "UsersController@delete");
+$routes->get("/users", "UsersController@browse");
+$routes->post("/users", "UsersController@create");
+$routes->patch("/users/{user_id}", "UsersController@update");
+$routes->put("/users/{user_id}", "UsersController@replace");
+
+// head responses do not return a body
+$routes->head("/users", fn() => response(200));
+```
+
+There are two additional methods, `all()` which matches all the above HTTP verbs and `any()` which accepts an array of HTTP verbs to match:
+
+```php
+// match all HTTP verbs
+$routes->all("/admin", function() {
+    echo "This route matches all HTTP methods";
+});
+
+// match only the GET and POST HTTP methods (case insensitive)
+$routes->any(["get","post"], "/all", function() {
+    echo "This route matches the GET and POST HTTP methods";
+});
+```
+
+#### Placeholders
+
+Router uses the same regex as FastRoute and is broadly compatible with the syntax of [Slim](https://www.slimframework.com/docs/v4/objects/routing.html#route-placeholders).
+
+```php
+// a named parameter
+$routes->get("/hello/{name}", function($request) {
+    // get the 'name' parameter from the Request Route parameters
+    $name = $request->route()->param("name");
+});
+```
+
+#### Naming routes
+
+_Routes_ can be named using the `name()` method after defining the route:
+
+```php
+$routes->get("/", "HomeController@index")->name("home");
+```
+
+#### Redirects
+
+Use the `redirect()` method to quickly return a redirect response.
+
+```php
+// enter the path to match and the url to redirect to
+$routes->redirect("/from/this/url", "https://example.com/to/here");
+
+// by default the status code defaults to 302 (temporary redirect)
+// change it using the third argument
+$routes->redirect("/from/this/url", "https://example.com/to/here", 301);
+```
+
+#### Groups
+
+_Routes_ can be organised into groups using the `group()` method.
+
+**Note:** The routes collector is named `$group` inside the closure.
+
+```php
+$routes->group("/session", function() {
+    $group->post("/", CreateSessionAction::class)->name("session.create");
+    $group->delete("/", DeleteSessionAction::class)->name("session.delete");
+});
+```
+
+#### Middleware
+
+_Routes_ and _Route Groups_ support the `use()` method to attach middleware, this middleware will be called after the app middleware defined in `boot/middleware.php`.
+
+```php
+// attach middleware to a single route
+$routes->get("/private", function() {
+    return response()->json([
+        "message"" => "This route is private and guarded by the PrivateGuardMiddleware",
+    ]);
+})->use([
+    new PrivateGuardMiddleware::class
+]);
+
+// attach middleware to a route group
+$routes->group("/admin/blog", function() {
+    $group->get("/", BrowsePostsAction::class)->name("admin.blog.browse");
+    $group->post("/", CreatePostAction::class)->name("admin.blog.create");
+    $group->get("/{public_id}", ShowPostAction::class)->name("admin.blog.show");
+    $group->patch("/{public_id}", UpdatePostAction::class)->name("admin.blog.update");
+    $group->delete("/{public_id}", DeletePostAction::class)->name("admin.blog.delete");
+})->use([
+    new AuthMiddleware::class
+]);
+```
+
+### Route
+
+The matched _Route_ instance is attached to the _Request_ and can be accessed using the `route()` method on a _Request_ instance.
+
+#### Path
