@@ -1,3 +1,7 @@
+::: warning Phico is in BETA
+Phico is currently in BETA, this means breakage is expected and not all project packages are public.
+:::
+
 # Why Phico
 
 After buiding backend services with Laravel and Slim for a number of years and enjoying their respective advantages I found myself longing for an alternative, something smaller, lighter and easier to work with.

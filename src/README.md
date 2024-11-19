@@ -1,5 +1,6 @@
 ---
 home: true
+betaBanner: true
 title: PhicoPHP - Lightweight, dependency free framework
 heroImage: https://phico-php.net/img/phico-colour.svg
 heroText: Simple, Easy, Fast
@@ -33,6 +34,7 @@ actions:
 
 # *Except dev dependencies and reliance on some 3rd party packages in the addons
 
+
 features:
   - title: Simple
     details: Phico is small and laser focused, the code is obviously structured and easy to read and understand.
@@ -49,3 +51,7 @@ features:
 
 footer: Copyright ©2024 indgy.uk
 ---
+
+::: warning Phico is in BETA
+Phico is currently in BETA, this means breakage is expected and not all project packages are public.
+:::

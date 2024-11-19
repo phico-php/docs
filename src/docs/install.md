@@ -1,3 +1,7 @@
+::: warning Phico is in BETA
+Phico is currently in BETA, this means breakage is expected and not all project packages are public.
+:::
+
 # Installation
 
 The easiest way to get started with Phico is to install one of the App skeletons from the github repo.

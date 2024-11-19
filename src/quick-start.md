@@ -2,7 +2,13 @@
 title: Quick start
 ---
 
+::: warning Phico is in BETA
+Phico is currently in BETA, this means breakage is expected and not all project packages are public.
+:::
+
 # Quick start
+
+It's simple to get going with Phico, here's the quick version, read on for the details.
 
 ## TL;DR
 
@@ -111,4 +117,4 @@ Check it in your browser [here](http://localhost:8080/hello/phico)
 
 ## Next steps
 
-Once you have the install working you might want to familiarise yourelf with the core Phico code and it the available library packages.
+Once you have your app install working you might want to familiarise yourelf with the [core code](https://github.com/phico-php/phico/blob/main/src/Phico.php) and the available library packages in the [documentation](https://phico-php.net/docs/).
