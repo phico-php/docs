@@ -38,4 +38,4 @@ jobs:
             # Deploy via rsync
             - name: Deploy to remote server
               run: |
-                  rsync -avz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public/
+                  rsync -avvvz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public/
