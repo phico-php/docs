@@ -3,36 +3,35 @@ name: Deploy VuePress Site
 on:
   push:
     branches:
-      - main # Trigger on push to the main branch
-
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 22
 
-      # Step 3: Install dependencies and build
+      # Install dependencies and build
       - name: Install dependencies and build
         run: |
           npm install
           npm run docs:build
 
-      # Step 4: Setup SSH
+      # Setup SSH
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Step 5: Deploy via rsync
+      # Deploy via rsync
       - name: Deploy to remote server
         run: |
-          rsync -avz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public
+          rsync -avz --delete ./src/.vuepress/dist/ phico-php.net@phico-php.net:~/website/public/
