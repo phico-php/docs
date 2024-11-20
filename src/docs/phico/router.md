@@ -1,19 +1,14 @@
 # Router
-
 Router provides support for _named routes_, route middleware and the `pathFor()` helper function.
 
 ## Installation
-
 Install via composer if required.
-
 ```sh
 composer require phico/router
 ```
 
 ## Middleware
-
 Add the middleware to your application
-
 ```php
 // boot/middleware.php
 
@@ -31,19 +26,14 @@ $app->use[
 ```
 
 ## Usage
-
 ### Routing
-
 Use the `routes()` helper to get the Route collector instance.
-
 ```php
 $routes = routes();
 ```
-
 Then define your routes.
 
 #### Methods
-
 The Route Collector defines routes using the HTTP method verb `delete`, `get`, `head`, `options`, `patch`, `post`, `put`.
 
 ```php
@@ -72,9 +62,7 @@ $routes->any(["get","post"], "/all", function() {
 ```
 
 #### Placeholders
-
 Router uses the same regex as FastRoute and is broadly compatible with the syntax of [Slim](https://www.slimframework.com/docs/v4/objects/routing.html#route-placeholders).
-
 ```php
 // a named parameter
 $routes->get("/hello/{name}", function($request) {
@@ -83,18 +71,40 @@ $routes->get("/hello/{name}", function($request) {
 });
 ```
 
+##### Optional placeholders
+Use square brackets to identify optional placeholders.
+```php
+$routes->get("/hello[/{name}]", Hello::class);
+// optional segments can be nested
+$routes->get("/blog[/{year}[/{month}]]", Blog\Browse::class);
+```
+
+##### Regex matching
+Placeholders can be restricted by regex to provide basic input filtering.
+```php
+// only allow digits for the user 'id'
+$routes->get("/user/{id:[0-9]+}", User\View::class);
+```
+#### Catchall route
+Use `*` as a catchall route.
+
+**NOTE:** Place this last in your routes.
+```php
+$app->get("*", function($request) {
+    return response()->text([
+        "Hmm, we can't find that, try this..."
+    ]);
+});
+```
+
 #### Naming routes
-
 _Routes_ can be named using the `name()` method after defining the route:
-
 ```php
 $routes->get("/", "HomeController@index")->name("home");
 ```
 
 #### Redirects
-
 Use the `redirect()` method to quickly return a redirect response.
-
 ```php
 // enter the path to match and the url to redirect to
 $routes->redirect("/from/this/url", "https://example.com/to/here");
@@ -105,11 +115,8 @@ $routes->redirect("/from/this/url", "https://example.com/to/here", 301);
 ```
 
 #### Groups
-
 _Routes_ can be organised into groups using the `group()` method.
-
 **Note:** The routes collector is named `$group` inside the closure.
-
 ```php
 $routes->group("/session", function() {
     $group->post("/", CreateSessionAction::class)->name("session.create");
@@ -118,9 +125,7 @@ $routes->group("/session", function() {
 ```
 
 #### Middleware
-
 _Routes_ and _Route Groups_ support the `use()` method to attach middleware, this middleware will be called after the app middleware defined in `boot/middleware.php`.
-
 ```php
 // attach middleware to a single route
 $routes->get("/private", function() {
@@ -144,7 +149,6 @@ $routes->group("/admin/blog", function() {
 ```
 
 ### Route
-
 The matched _Route_ instance is attached to the _Request_ and can be accessed using the `route()` method on a _Request_ instance.
 
 #### Path
