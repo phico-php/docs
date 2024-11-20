@@ -153,6 +153,61 @@ $routes->group("/admin/blog", function() {
 ```
 
 ### Route
-The matched _Route_ instance is attached to the _Request_ and can be accessed using the `route()` method on a _Request_ instance.
+The matched _Route_ instance is attached to the _Request_ and can be accessed using the `route()` method on the Request_ instance.
 
-#### Path
+#### Params
+Returns a _Capsule_ containing the route parameters.
+```php
+// example route definition
+$routes->get("/blog[/{year}[/{month}]]", Blog\Browse::class);
+
+...
+
+// in your code
+$params = $request->route()->params();
+echo "Results for {$params->year} during {$params->month}";
+```
+
+#### Param
+Returns a single parameter or a default.
+```php
+// example route definition
+$routes->get("/blog[/{year}[/{month}]]", Blog\Browse::class);
+
+...
+
+// in your code
+$params = $request->route()->params();
+if ($params->year and $params->month) {
+    // filter by year and month
+} elseif ($params->year) {
+    // filter by year
+} else {
+    // no filter
+}
+```
+
+#### Name
+Returns the name of the Route.
+```php
+$route->name(); // home
+```
+
+#### PathFor
+Returns the path to the route, any required placeholders must be provided.
+```php
+// route definition
+$routes->get("/blog[/{year}[/{month}]]", Blog\Browse::class)->name("blog.browse");
+
+// returns /blog
+$route->pathFor("blog.browse", []);
+
+// returns /blog/2024
+$route->pathFor("blog.browse", ["year" => 2024]);
+
+// returns /blog/2024/dec
+$route->pathFor("blog.browse", [
+    "year" => 2024,
+    "month" => "dec"
+]);
+```
