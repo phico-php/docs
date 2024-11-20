@@ -1,3 +1,7 @@
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
+
 # Container
 
 Container handles dependency injection for your application classes. Define your dependencies using the `set()` method

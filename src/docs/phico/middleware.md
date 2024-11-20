@@ -1,3 +1,7 @@
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
+
 # Middleware
 
 Middleware is a fundamental part of Phico, in fact one of Phicos three public methods is the `use()` method which attaches middleware to every request.

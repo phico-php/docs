@@ -1,3 +1,7 @@
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
+
 # Filesystem
 
 Filesystem provides two helpers to manage `files()` and `folders()`.

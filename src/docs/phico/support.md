@@ -1,11 +1,11 @@
-# Support
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
 
+# Support
 Support classes and functions.
 
-## Quick Reference
-
-### String helper
-
+## Strings
 `str()` Returns a new `String` instance to quickly manipulate strings.
 These methods are for internal use by Phico but exposed here in case they are useful.
 

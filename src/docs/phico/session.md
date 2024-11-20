@@ -1,3 +1,7 @@
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
+
 # Session
 
 Phico requires specialised session support to adapt to PHP-FPM and Workerman environments.

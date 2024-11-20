@@ -1,3 +1,7 @@
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
+:::
+
 # Router
 Router provides support for _named routes_, route middleware and the `pathFor()` helper function.
 
@@ -66,7 +70,7 @@ Router uses the same regex as FastRoute and is broadly compatible with the synta
 ```php
 // a named parameter
 $routes->get("/hello/{name}", function($request) {
-    // get the 'name' parameter from the Request Route parameters
+    // get the 'name' parameter from the Route parameters
     $name = $request->route()->param("name");
 });
 ```

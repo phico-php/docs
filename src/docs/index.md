@@ -2,14 +2,13 @@
 title: Documentation
 ---
 
-::: warning Phico is in BETA
-Phico is currently in BETA, this means breakage is expected and not all project packages are public.
+::: warning Phico is a work in progress
+Phico is currently a work in progress, errors, omissions and changes are to be expected.
 :::
 
 # Documentation
 
 ## What is Phico
-
 Phico is a small PHP framework that aims to strike a middle ground between micro-frameworks like [Slim](https://slimframework.com) and heavyweight frameworks like [Laravel](https://laravel.com)
 Although it is small Phico aims to punch above its weight by offering:
 - **HTTP adaptability** supporting Requests, Responses and Middleware.
