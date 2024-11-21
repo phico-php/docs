@@ -102,16 +102,8 @@ export default defineUserConfig({
                             link: "/docs/phico/container.html",
                         },
                         {
-                            text: "Database",
-                            link: "/docs/phico/database.html",
-                        },
-                        {
                             text: "Filesystem",
                             link: "/docs/phico/filesystem.html",
-                        },
-                        {
-                            text: "Locale",
-                            link: "/docs/phico/locale.html",
                         },
                         {
                             text: "Logger",
@@ -134,16 +126,80 @@ export default defineUserConfig({
                             link: "/docs/phico/router.html",
                         },
                         {
-                            text: "Session",
-                            link: "/docs/phico/session.html",
-                        },
-                        {
                             text: "Support",
                             link: "/docs/phico/support.html",
                         },
                         {
                             text: "View",
                             link: "/docs/phico/view.html",
+                        },
+                    ],
+                },
+                {
+                    collapsable: true,
+                    text: "Libraries",
+                    children: [
+                        {
+                            text: "Authentication",
+                            link: "/docs/library/auth/",
+                        },
+                        {
+                            text: "Cache",
+                            link: "/docs/library/cache/",
+                        },
+                        {
+                            text: "CDN",
+                            link: "/docs/library/cdn/",
+                        },
+                        {
+                            text: "Database",
+                            link: "/docs/library/database/",
+                        },
+                        {
+                            text: "Http client",
+                            link: "/docs/library/http-client/",
+                        },
+                        {
+                            text: "Locale",
+                            link: "/docs/library/locale/",
+                        },
+                        {
+                            text: "Mailer",
+                            link: "/docs/library/mailer/",
+                        },
+                        {
+                            text: "Profiler",
+                            link: "/docs/library/profiler/",
+                        },
+                        {
+                            text: "Query",
+                            link: "/docs/library/query/",
+                        },
+                        {
+                            text: "Queue",
+                            link: "/docs/library/queue/",
+                        },
+                        {
+                            text: "Validation",
+                            link: "/docs/library/validation/",
+                        },
+                        {
+                            text: "Session",
+                            link: "/docs/library/session/",
+                        },
+                        {
+                            text: "View",
+                            link: "/docs/library/view/",
+                        },
+                    ],
+                },
+                {
+                    collapsable: true,
+                    text: "Works",
+                    children: [
+                        {
+                            text: "Introduction",
+                            link: "/docs/works/",
                         },
                     ],
                 },
