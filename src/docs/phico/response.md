@@ -7,6 +7,8 @@ Phico is currently a work in progress, errors, omissions and changes are to be e
 A _Response_ should be returned by your app code in response to a _Request_.
 The _Response_ is then handled by the _ResponseHandler_ middleware.
 
+
+
 ```php
 response()->json([
     "message" => "Are we there yet?"
@@ -22,55 +24,6 @@ response(422)->json([
         "name" => "Please enter your name"
     ]
 ]);
-```
-
-## Caching
-
-### Cache
-Sets the `cache-control` headers for the response.
-```php
-// use a timestamp
-response()->cache(time() + 36400);
-// or a DateTime instance
-response()->cache(new DateTime("+1 hour");
-```
-
-### Expires
-Sets an expiry date for the response.
-```php
-// use a timestamp
-response()->expires(time() + 36400);
-// or a DateTime instance
-response()->expires(new DateTime("2025-01-01: 00:00:01");
-```
-
-## No cache
-Sets the no-cache headers for the response
-```php
-response()->noCache();
-```
-
-
-## Helpers
-
-### Download
-Sets download headers for a file.
-```php
-response()->download("/path/to/file", "filename-for-browser.md");
-```
-
-### Empty
-Sets an empty response with a 204 status code.
-```php
-response()->empty();
-```
-
-## Redirect
-Sets the location header for the response
-```php
-response()->redirect("https://example.com/path/to");
-// the default status code is 302 (temporary), override it as needed
-response()->redirect("/new/path", 301);
 ```
 
 ## Body
@@ -105,6 +58,55 @@ Once the body has been set it can be accesed by the `body()` method.
 $body = $response->body();
 ```
 
+
+## Helpers
+
+### Download
+Sets download headers for a file.
+```php
+response()->download("/path/to/file", "filename-for-browser.md");
+```
+
+### Empty
+Sets an empty response with a 204 status code.
+```php
+response()->empty();
+```
+
+## Redirect
+Sets the location header for the response
+```php
+response()->redirect("https://example.com/path/to");
+// the default status code is 302 (temporary), override it as needed
+response()->redirect("/new/path", 301);
+```
+
+
+## Caching
+
+### Cache
+Sets the `cache-control` headers for the response.
+```php
+// use a timestamp
+response()->cache(time() + 36400);
+// or a DateTime instance
+response()->cache(new DateTime("+1 hour");
+```
+
+### Expires
+Sets an expiry date for the response.
+```php
+// use a timestamp
+response()->expires(time() + 36400);
+// or a DateTime instance
+response()->expires(new DateTime("2025-01-01: 00:00:01");
+```
+
+## No cache
+Sets the no-cache headers for the response
+```php
+response()->noCache();
+```
 
 ## Cookies
 Returns the list of Cookies attached to the _Response_.
