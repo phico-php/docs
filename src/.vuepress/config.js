@@ -3,6 +3,7 @@ import { defineUserConfig } from "vuepress/cli";
 import { viteBundler } from "@vuepress/bundler-vite";
 
 export default defineUserConfig({
+    bundler: viteBundler(),
     lang: "en-GB",
     description: "Phico PHP",
     head: [
@@ -141,55 +142,55 @@ export default defineUserConfig({
                     children: [
                         {
                             text: "Authentication",
-                            link: "/docs/library/auth/",
+                            link: "/docs/library/auth/index.html",
                         },
                         {
                             text: "Cache",
-                            link: "/docs/library/cache/",
+                            link: "/docs/library/cache/index.html",
                         },
                         {
                             text: "CDN",
-                            link: "/docs/library/cdn/",
+                            link: "/docs/library/cdn/index.html",
                         },
                         {
                             text: "Database",
-                            link: "/docs/library/database/",
+                            link: "/docs/library/database/index.html",
                         },
                         {
                             text: "Http client",
-                            link: "/docs/library/http-client/",
+                            link: "/docs/library/http-client/index.html",
                         },
                         {
                             text: "Locale",
-                            link: "/docs/library/locale/",
+                            link: "/docs/library/locale/index.html",
                         },
                         {
                             text: "Mailer",
-                            link: "/docs/library/mailer/",
+                            link: "/docs/library/mailer/index.html",
                         },
                         {
                             text: "Profiler",
-                            link: "/docs/library/profiler/",
+                            link: "/docs/library/profiler/index.html",
                         },
                         {
                             text: "Query",
-                            link: "/docs/library/query/",
+                            link: "/docs/library/query/index.html",
                         },
                         {
                             text: "Queue",
-                            link: "/docs/library/queue/",
+                            link: "/docs/library/queue/index.html",
                         },
                         {
                             text: "Validation",
-                            link: "/docs/library/validation/",
+                            link: "/docs/library/validation/index.html",
                         },
                         {
                             text: "Session",
-                            link: "/docs/library/session/",
+                            link: "/docs/library/session/index.html",
                         },
                         {
                             text: "View",
-                            link: "/docs/library/view/",
+                            link: "/docs/library/view/index.html",
                         },
                     ],
                 },
@@ -206,6 +207,4 @@ export default defineUserConfig({
             ],
         },
     }),
-
-    bundler: viteBundler(),
 });
